@@ -1,0 +1,21 @@
+<h2>Chats</h2>
+
+{% if chats %}
+    <ul>
+    {% for chat in chats %}
+        <li>
+            <a href="{% url 'chat_detail' chat.id %}">
+                Chat #{{ chat.id }} —
+                {% for user in chat.participants.all %}
+                    {% if user != request.user %}{{ user.username }}{% endif %}
+                {% endfor %}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No chats yet.</p>
+{% endif %}
+
+<a href="{% url 'chat_create' %}">New chat</a>
+<a href="{% url 'profile_create' %}">Create Profile</a>

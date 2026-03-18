@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ profile_user.username }}'s Profile</title>
+</head>
+<body>
+<h2>
+    {% if profile_user.profile.display_name %}
+        {{ profile_user.profile.display_name }}
+    {% else %}
+        {{ profile_user.username }}
+    {% endif %}
+</h2>
+
+<p>Email: {{ profile_user.email }}</p>
+<p>Age: {{ profile_user.profile.age }}</p>
+
+{% if profile_user.profile.avatar %}
+    <img src="{{ profile_user.profile.avatar.url }}" width="150" alt="avatar">
+{% else %}
+    <p>No avatar uploaded.</p>
+{% endif %}
+
+{% if profile_user == user %}
+    <a href="{% url 'profile_edit' %}">Edit Profile</a>
+{% else %}
+    <a href="{% url 'chat_create' %}">Start Chat</a>
+{% endif %}
+
+<a href="{% url 'homepage' %}">Back to homepage</a>
+</body>
+</html>
